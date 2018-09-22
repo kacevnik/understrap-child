@@ -10,14 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-if (defined( 'FW' )){
-    $price     = fw_get_db_post_option(get_the_ID(), 'kdv_object_price');
-    $sq        = fw_get_db_post_option(get_the_ID(), 'kdv_object_sq');
-    $slider    = fw_get_db_post_option(get_the_ID(), 'kdv_odject_slider');
-    $adres     = fw_get_db_post_option(get_the_ID(), 'kdv_object_adres');
-    $seller    = fw_get_db_post_option(get_the_ID(), 'kdv_object_select');
-}
-
 get_header();
 $container   = get_theme_mod( 'understrap_container_type' );
 ?>

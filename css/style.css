@@ -1,0 +1,29 @@
+.object-thumbail img{
+    width: 100%;
+    margin: 30px 0 0 0;
+}
+
+.post-slider{
+    margin: 30px 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.post-slider-item{
+    width: 31%;
+    border: 2px solid transparent;
+}
+
+.post-slider-item:hover{
+    width: 31%;
+    border: 2px solid #ccc;
+}

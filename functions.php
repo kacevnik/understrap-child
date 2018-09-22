@@ -29,6 +29,26 @@
         add_action('admin_notices', 'com_version_wp');
     }
 
+/* add custom JS and CSS files */
+
+    add_action( 'wp_enqueue_scripts', 'enqueue_cusiom_scripts' );
+
+    if(!function_exists( 'enqueue_cusiom_scripts') ) {
+
+        function enqueue_cusiom_scripts() {
+
+            if(is_admin()) return false;
+
+            wp_enqueue_style( 'fancybox', get_stylesheet_directory_uri().'/css/jquery.fancybox.min.css', array(), '3.4.2', 'all' );
+            wp_enqueue_style( 'main-style', get_stylesheet_directory_uri().'/css/style.css', array(), '1.0.0', 'all' );
+
+            wp_enqueue_script( 'fancybox', get_stylesheet_directory_uri().'/js/jquery.fancybox.min.js', array('jquery'),'3.4.2', true );
+            wp_enqueue_script( 'main', get_stylesheet_directory_uri().'/js/main.js', array('jquery'),'3.4.2', true );
+
+        }
+
+    }
+
 
 /* add costom type taxonomy */
 

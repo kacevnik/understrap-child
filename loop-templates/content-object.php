@@ -8,6 +8,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+
+if (defined( 'FW' )){
+    $price     = fw_get_db_post_option(get_the_ID(), 'kdv_object_price');
+    $sq        = fw_get_db_post_option(get_the_ID(), 'kdv_object_sq');
+    $slider    = fw_get_db_post_option(get_the_ID(), 'kdv_odject_slider');
+    $adress     = fw_get_db_post_option(get_the_ID(), 'kdv_object_adres');
+    $seller    = fw_get_db_post_option(get_the_ID(), 'kdv_object_select');
+}
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -23,19 +31,26 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div><!-- .entry-meta -->
 
     </header><!-- .entry-header -->
-
-    <?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
-    <div class="post-slider">
-        <div class="post-slider-item">
-            <a href=""><?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?></a>
-        </div>
-        <div class="post-slider-item">
-            <a href=""><?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?></a>
-        </div>
-        <div class="post-slider-item">
-            <a href=""><?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?></a>
-        </div>
+    
+    <div class="object-thumbail">
+        <?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
     </div>
+    <!-- /.object-thumbail -->
+
+
+    <?php if( count($slider) > 0 ) { ?>
+    <div class="post-slider">
+        <?php foreach ( $slider as $slide ) { ?>
+
+        <div class="post-slider-item">
+            <a href="<?php echo wp_get_attachment_image_url( $slide['img']['attachment_id'], 'full' ); ?>" data-fancybox="images">
+                <img src="<?php echo wp_get_attachment_image_url( $slide['img']['attachment_id'], 'object-thumb' ); ?>" alt="">
+            </a>
+        </div>
+
+    <?php } ?>
+    </div>
+    <?php } ?>
 
     <div class="entry-content">
 
