@@ -27,3 +27,52 @@
     width: 31%;
     border: 2px solid #ccc;
 }
+
+.object_addon{
+    list-style: none;
+    padding: 0;
+}
+
+.object_addon li{
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 0 0 20px 0;
+}
+
+.object_addon li:before{
+    content: "";
+    position: absolute;
+    border-bottom: 2px dotted #9f9f9f;
+    width: 100%;
+    bottom: 5px;
+    z-index: -1;
+}
+
+.object_addon_title{
+    font-weight: bold;
+    background: #ffffff;
+}
+
+.object_addon_body{
+    background: #ffffff;
+}
+
+h5 .object_addon_header{
+    margin: 25px 0 20px 0;
+}
+
+
+
+
+
+

@@ -65,6 +65,51 @@ if (defined( 'FW' )){
 
     </div><!-- .entry-content -->
 
+    <h5 class="object_addon_header">Дополнительные характеристики объекта:</h5>
+    <ul class="object_addon">
+        <li>
+            <div class="object_addon_title">
+                Цена:
+            </div>
+            <!-- /.object_addon_title -->
+            <div class="object_addon_body">
+                <?php echo $price; ?>
+            </div>
+            <!-- /.object_addon_body -->
+        </li>
+        <li>
+            <div class="object_addon_title">
+                Площадь:
+            </div>
+            <!-- /.object_addon_title -->
+            <div class="object_addon_body">
+                <?php echo $sq; ?>
+            </div>
+            <!-- /.object_addon_body -->
+        </li>
+        <li>
+            <div class="object_addon_title">
+                Адрес:
+            </div>
+            <!-- /.object_addon_title -->
+            <div class="object_addon_body">
+                <?php echo $adress; ?>
+            </div>
+            <!-- /.object_addon_body -->
+        </li>
+        <li>
+            <div class="object_addon_title">
+                Продавец:
+            </div>
+            <!-- /.object_addon_title -->
+            <div class="object_addon_body">
+                <?php echo $seller; ?>
+            </div>
+            <!-- /.object_addon_body -->
+        </li>
+    </ul>
+    <!-- /.object_addon -->
+
     <footer class="entry-footer">
 
         <?php understrap_entry_footer(); ?>
