@@ -1,5 +1,13 @@
 <?php
 
+    /* creat new size picture for object thumb */
+
+    add_theme_support('post-thumbnails');
+    add_image_size('object-thumb', 300, 180, true);
+
+    /* add check set plag-in Unyson */
+    /* docs for unyson http://manual.unyson.io/en/latest/ */
+
     if (!defined( 'FW' )){
         function com_version_wp(){
             $action = 'install-plugin';
