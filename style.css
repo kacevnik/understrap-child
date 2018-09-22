@@ -1,0 +1,12 @@
+/*
+Theme Name: База недвижемости
+Template: understrap
+Theme URI: http://site.ru/
+Description: Дочерняя тема для темы UnderStrap
+Author: Kama
+Author URI: https://www.fl.ru/users/kacevnik/
+Version: 1.0.0
+*/
+
+/* импортируем стили родительской темы */
+@import url("../understrap/style.css");
