@@ -1,8 +1,32 @@
 <?php
 
-add_action('init', 'create_taxonomy_object');
+    if (!defined( 'FW' )){
+        function com_version_wp(){
+            $action = 'install-plugin';
+            $slug = 'unyson';
+            $url = wp_nonce_url(
+                add_query_arg(
+                    array(
+                        'action' => $action,
+                        'plugin' => $slug
+                    ),
+                    admin_url( 'update.php' )
+                ),
+                $action.'_'.$slug
+            );
+            echo    '<div class="notice notice-error">
+                        <p>Внимание! Для правильной работы должен быть установлен и активирован плагин Unyson! <a data-slug="unyson" href="'. $url .'" aria-label="Установить Unyson сейчас" class="install-now button">Установить</a></p>
+                    </div>';
+        }
+        add_action('admin_notices', 'com_version_wp');
+    }
+
+
+/* add costom type taxonomy */
+
+add_action( 'init', 'create_taxonomy_object' );
     function create_taxonomy_object(){
-        register_taxonomy('cat_object', array('object'), array(
+        register_taxonomy( 'cat_object', array('object' ), array(
             'label'                 => '', // определяется параметром $labels->name
             'labels'                => array(
                 'name' => _x( 'Тип недвижемости', 'taxonomy general name' ),
@@ -37,9 +61,12 @@ add_action('init', 'create_taxonomy_object');
             'show_in_quick_edit'    => null,
         ) );
     }
-    add_action('init', 'register_post_types_object');
+
+    /* add custom type post */
+
+    add_action( 'init', 'register_post_types_object' );
     function register_post_types_object(){
-        register_post_type('object', array(
+        register_post_type( 'object', array(
             'label'  => null,
             'labels' => array(
                 'name'               => 'Недвижемость',
