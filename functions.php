@@ -181,7 +181,56 @@ add_action( 'init', 'create_taxonomy_object' );
         ) );
     }
 
+    // add metabox cities for object
+    add_action('add_meta_boxes', function () {
+        add_meta_box( 'city_object', 'Город', 'city_object_metabox', 'object', 'side', 'low'  );
+    }, 1);
+
+    function city_object_metabox( $post ){
+        $cities = get_posts(array( 'post_type'=>'town', 'posts_per_page'=>-1, 'orderby'=>'post_title', 'order'=>'ASC' ));
+
+        if( $cities ){
+            echo '
+            <div style="max-height:200px; overflow-y:auto;">
+                <ul>
+            ';
+
+            foreach( $cities as $city ){
+                echo '
+                <li><label>
+                    <input type="radio" name="post_parent" value="'. $city->ID .'" '. checked($city->ID, $post->post_parent, 0) .'> '. esc_html($city->post_title) .'
+                </label></li>
+                ';
+            }
+
+            echo '
+                </ul>
+            </div>';
+        }
+        else
+            echo 'Городов нет...';
+    }
+
+    // add metabox object for cities
+    add_action('add_meta_boxes', function(){
+        add_meta_box( 'meta-object', 'Объекты недвижемости', 'object_city_metabox', 'town', 'side', 'low'  );
+    }, 1);
+
+    function object_city_metabox( $post ){
+        $objects = get_posts(array( 'post_type'=>'object', 'post_parent'=>$post->ID, 'posts_per_page'=>-1, 'orderby'=>'post_title', 'order'=>'ASC' ));
+
+        if( $objects ){
+            foreach( $objects as $object ){
+                echo '<a href="'.get_permalink($object->ID).'" target=_blank">'.$object->post_title .'</a><br>';
+            }
+        }
+        else
+            echo 'Объектов нет...';
+    }
+
     function change_admin_footer () {
         return '<i>Спасибо вам за творчество с <a href="http://wordpress.org">WordPress</a>; Всегда Ваш: <a href="https://www.fl.ru/users/kacevnik/">Дмитрий Ковалев</a></i>';
     }
     add_filter('admin_footer_text', 'change_admin_footer');
+
+
