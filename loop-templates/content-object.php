@@ -13,8 +13,9 @@ if (defined( 'FW' )){
     $price     = fw_get_db_post_option(get_the_ID(), 'kdv_object_price');
     $sq        = fw_get_db_post_option(get_the_ID(), 'kdv_object_sq');
     $slider    = fw_get_db_post_option(get_the_ID(), 'kdv_odject_slider');
-    $adress     = fw_get_db_post_option(get_the_ID(), 'kdv_object_adres');
+    $adress    = fw_get_db_post_option(get_the_ID(), 'kdv_object_adres');
     $seller    = fw_get_db_post_option(get_the_ID(), 'kdv_object_select');
+    $city      = get_post($post->post_parent);
 }
 ?>
 
@@ -104,6 +105,16 @@ if (defined( 'FW' )){
             <!-- /.object_addon_title -->
             <div class="object_addon_body">
                 <?php echo $seller; ?>
+            </div>
+            <!-- /.object_addon_body -->
+        </li>
+        <li>
+            <div class="object_addon_title">
+                Город:
+            </div>
+            <!-- /.object_addon_title -->
+            <div class="object_addon_body">
+                <?php echo $city->post_title; ?>
             </div>
             <!-- /.object_addon_body -->
         </li>

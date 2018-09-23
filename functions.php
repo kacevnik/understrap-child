@@ -46,10 +46,75 @@
             wp_enqueue_style( 'main-style', get_stylesheet_directory_uri().'/css/style.css', array(), '1.0.0', 'all' );
 
             wp_enqueue_script( 'fancybox', get_stylesheet_directory_uri().'/js/jquery.fancybox.min.js', array('jquery'),'3.4.2', true );
-            wp_enqueue_script( 'main', get_stylesheet_directory_uri().'/js/main.js', array('jquery'),'3.4.2', true );
+            wp_enqueue_script( 'main', get_stylesheet_directory_uri().'/js/main.js', array('jquery'),'1.0.0', true );
+
+            wp_localize_script( 'main', 'addObject', array(
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'nonce' => wp_create_nonce( 'add-object' )
+            ) );
 
         }
 
+    }
+
+    add_action('wp_ajax_add_custom_object', 'add_custom_object');
+    add_action('wp_ajax_nopriv_add_custom_object', 'add_custom_object');
+
+    function add_custom_object(){
+        if ( empty( $_POST['nonce'] ) ) {
+            wp_die( '0' );
+        }
+
+        if ( wp_verify_nonce( $_POST['nonce'], 'add-object' ) ) {
+            $post_data = array(
+                'post_title'    => wp_strip_all_tags( $_POST['name'] ),
+                'post_content'  => $_POST['desc'],
+                'post_status'   => 'draft',
+                'post_type'     => 'object',
+                'post_parent'   => ( int )abs( $_POST['town'] )
+            );
+
+            $post_id = wp_insert_post( $post_data );
+            wp_set_post_terms( $post_id, array( ( int )abs( $_POST['type_obj'] ) ), 'cat_object', false );
+
+            $data = array(
+                'kdv_object_price'  => esc_html( $_POST['price'] ),
+                'kdv_object_sq'     => esc_html( $_POST['sq'] ),
+                'kdv_object_adres'  => esc_html( $_POST['adres'] ),
+                'kdv_object_select' => esc_html( $_POST['seller'] )
+            );
+
+            add_post_meta( $post_id, 'fw_options', $data );
+
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            require_once ABSPATH . 'wp-admin/includes/media.php';
+            
+            add_filter( 'upload_mimes', function( $mimes ){
+                return [
+                    'jpg|jpeg|jpe' => 'image/jpeg',
+                    'gif'          => 'image/gif',
+                    'png'          => 'image/png',
+                ];
+            } );
+
+            $uploaded_imgs = array();
+
+            foreach( $_FILES as $file_id => $data ){
+                $attach_id = media_handle_upload( $file_id, $post_id );
+                update_post_meta( $post_id, '_thumbnail_id', $attach_id );
+
+                if( is_wp_error( $attach_id ) )
+                    $uploaded_imgs[] = 'Ошибка загрузки файла `'. $data['name'] .'`: '. $attach_id->get_error_message();
+                else
+                    $uploaded_imgs[] = wp_get_attachment_url( $attach_id );
+            }
+
+        }else {
+            wp_die( '0' );
+        }
+
+        wp_die();
     }
 
 
@@ -212,16 +277,16 @@ add_action( 'init', 'create_taxonomy_object' );
     }
 
     // add metabox object for cities
-    add_action('add_meta_boxes', function(){
-        add_meta_box( 'meta-object', 'Объекты недвижемости', 'object_city_metabox', 'town', 'side', 'low'  );
-    }, 1);
+    add_action( 'add_meta_boxes', function(){
+        add_meta_box( 'meta-object', 'Объекты недвижемости', 'object_city_metabox', 'town', 'side', 'low' );
+    }, 1 );
 
     function object_city_metabox( $post ){
-        $objects = get_posts(array( 'post_type'=>'object', 'post_parent'=>$post->ID, 'posts_per_page'=>-1, 'orderby'=>'post_title', 'order'=>'ASC' ));
+        $objects = get_posts( array( 'post_type'=>'object', 'post_parent'=>$post->ID, 'posts_per_page'=>-1, 'orderby'=>'post_title', 'order'=>'ASC' ) );
 
         if( $objects ){
             foreach( $objects as $object ){
-                echo '<a href="'.get_permalink($object->ID).'" target=_blank">'.$object->post_title .'</a><br>';
+                echo '<a href="'.get_permalink( $object->ID ).'" target=_blank">'.$object->post_title .'</a><br>';
             }
         }
         else
@@ -231,6 +296,6 @@ add_action( 'init', 'create_taxonomy_object' );
     function change_admin_footer () {
         return '<i>Спасибо вам за творчество с <a href="http://wordpress.org">WordPress</a>; Всегда Ваш: <a href="https://www.fl.ru/users/kacevnik/">Дмитрий Ковалев</a></i>';
     }
-    add_filter('admin_footer_text', 'change_admin_footer');
+    add_filter( 'admin_footer_text', 'change_admin_footer' );
 
 
