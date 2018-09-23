@@ -71,6 +71,77 @@ h5 .object_addon_header{
     margin: 25px 0 20px 0;
 }
 
+.list_last_objects_item{
+    border: 1px solid #e7e7e7;
+    font-size: 14px;
+    margin: 0 0 30px 0;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.list_last_objects_item img{
+    width: 100%;
+}
+
+.list_last_objects_item:hover{
+    -webkit-box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 1px 17px rgba(0, 0, 0, 0.08);
+}
+
+.list_last_objects_item h4{
+    font-size: 18px;
+    padding: 6px 15px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.list_last_objects_item h4 a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.list_last_objects_item h4 a:hover{
+    color: #0061ff;
+    text-decoration: none;
+}
+
+.list_last_objects_item p{
+    margin: 0 0 5px 0;
+    padding: 0 15px;
+    color: #9b9b9b;
+}
+
+.list_last_objects_item a.more{
+    color: #000000;
+    border-top: 1px solid #e7e7e7;
+    display: block;
+    padding: 10px 15px;
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.list_last_objects_item a.more:hover{
+    color: #0061ff;
+    text-decoration: none;
+}
+
+.list_last_objects .col-xl-3{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .list_last_objects .col-xl-3{
+        display: block;
+    }
+}
+
 
 
 
