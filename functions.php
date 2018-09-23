@@ -92,7 +92,7 @@ add_action( 'init', 'create_taxonomy_object' );
         ) );
     }
 
-    /* add custom type post */
+    /* add custom type post object*/
 
     add_action( 'init', 'register_post_types_object' );
     function register_post_types_object(){
@@ -136,6 +136,52 @@ add_action( 'init', 'create_taxonomy_object' );
         ) );
     }
 
+/* add custom type post town*/
+
+    add_action( 'init', 'register_post_types_town' );
+    function register_post_types_town(){
+        register_post_type( 'town', array(
+            'label'  => null,
+            'labels' => array(
+                'name'               => 'Город',
+                'singular_name'      => 'Город',
+                'add_new'            => 'Добавить город',
+                'add_new_item'       => 'Добавление города',
+                'edit_item'          => 'Редактирование города',
+                'new_item'           => 'Новый город',
+                'view_item'          => 'Смотреть город',
+                'search_items'       => 'Искать город',
+                'not_found'          => 'Не найдено',
+                'not_found_in_trash' => 'Не найдено в корзине',
+                'parent_item_colon'  => '',
+                'menu_name'          => 'Города',
+            ),
+            'description'         => '',
+            'public'              => true,
+            'publicly_queryable'  => null,
+            'exclude_from_search' => null,
+            'show_ui'             => null,
+            'show_in_menu'        => null,
+            'show_in_admin_bar'   => null,
+            'show_in_nav_menus'   => null,
+            'show_in_rest'        => null,
+            'rest_base'           => null,
+            'menu_position'       => null,
+            'menu_icon'           => 'dashicons-location', 
+            //'capability_type'   => 'post',
+            //'capabilities'      => 'post',
+            //'map_meta_cap'      => null,
+            'hierarchical'        => false,
+            'supports'            => array('title','editor','thumbnail'), // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+            'taxonomies'          => array(),
+            'has_archive'         => false,
+            'rewrite'             => true,
+            'query_var'           => true,
+        ) );
+    }
+
     function change_admin_footer () {
         return '<i>Спасибо вам за творчество с <a href="http://wordpress.org">WordPress</a>; Всегда Ваш: <a href="https://www.fl.ru/users/kacevnik/">Дмитрий Ковалев</a></i>';
     }
+    add_filter('admin_footer_text', 'change_admin_footer');
+    
