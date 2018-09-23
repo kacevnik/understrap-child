@@ -147,6 +147,10 @@ h5 .object_addon_header{
     margin: 15px 0 30px 0;
 }
 
+.list_last_objects_item.cities h4{
+    border: none;
+}
+
 
 
 

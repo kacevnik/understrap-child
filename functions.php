@@ -1,6 +1,7 @@
 <?php
 
     include ('inc/shortcode_last_object.php');
+    include ('inc/shortcode_last_town.php');
 
     /* creat new size picture for object thumb */
 
@@ -184,4 +185,3 @@ add_action( 'init', 'create_taxonomy_object' );
         return '<i>Спасибо вам за творчество с <a href="http://wordpress.org">WordPress</a>; Всегда Ваш: <a href="https://www.fl.ru/users/kacevnik/">Дмитрий Ковалев</a></i>';
     }
     add_filter('admin_footer_text', 'change_admin_footer');
-    
