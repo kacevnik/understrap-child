@@ -63,6 +63,7 @@ jQuery(document).ready(function($) {
         $( 'input[name=object_sq').val( '' ),
         $( this).find('#add_new_object' ).prop( 'disabled', true) ;
         $( '#add_object_form' ).animate( {'opacity': '1'}, 300 );
+        $("#click_thanks_message").trigger("click");
 
     });
 

@@ -151,6 +151,65 @@ h5 .object_addon_header{
     border: none;
 }
 
+#add_form{
+    background: #e7e7e7;
+    padding: 50px 0;
+}
+
+
+#add_form form{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+#add_form input, #add_form select{
+    width: 320px;
+    height: 45px;
+    margin: 0 0 15px 0;
+    padding: 5px 7px;
+    border: 2px solid #ccc;
+}
+
+#add_form textarea{
+    width: 320px;
+    height: 88px;
+    margin: 0 0 15px 0;
+    padding: 5px;
+}
+
+#add_form input[name="submit"]{
+    color: #0061ff;
+    border: 2px solid #0061ff;
+    cursor: pointer;
+}
+
+
+#add_form input[name="submit"]:hover{
+    background: #0061ff;
+    color: #ffffff;
+}
+
+#click_thanks_message, #thanks_message{
+    display: none;
+}
+
+#thanks_message{
+    max-width: 430px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+
 
 
 
