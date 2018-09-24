@@ -2,6 +2,7 @@
 
     include ('inc/shortcode_last_object.php');
     include ('inc/shortcode_last_town.php');
+    include ('inc/widget_add_object.php');
 
     /* creat new size picture for object thumb */
 
@@ -32,6 +33,16 @@
         add_action('admin_notices', 'com_version_wp');
     }
 
+/* register new area wdgets in theme */
+    register_sidebar( array(
+        'name' => 'Область над футером',
+        'id' => 'widget_for_form',
+        'before_widget' => '',
+        'after_widget' => '',
+        'before_title' => '',
+        'after_title' => ''
+    ) );
+
 /* add custom JS and CSS files */
 
     add_action( 'wp_enqueue_scripts', 'enqueue_cusiom_scripts' );
@@ -56,6 +67,8 @@
         }
 
     }
+
+/* function adding new object with help ajax*/
 
     add_action('wp_ajax_add_custom_object', 'add_custom_object');
     add_action('wp_ajax_nopriv_add_custom_object', 'add_custom_object');
@@ -116,7 +129,6 @@
 
         wp_die();
     }
-
 
 /* add costom type taxonomy */
 
